@@ -1,0 +1,181 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>Bookmark</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		<script>
+		var arrayBooks = [];
+		var contadorBoton = 0;
+		var contadorBookmark =1;
+		var contadorEtiquetas = 1;
+		var indice = 0;
+		
+		class Book{
+			constructor(){
+				this.titulo = "";
+				this.url = "";
+				this.descri = "";
+			}
+			set setTitulo(titulo)
+			{
+				this.titulo = titulo;
+			}
+			set setUrl(url)
+			{
+				this.url = url;
+			}
+			set setDescri(descri)
+			{
+				this.descri = descri;
+			}
+			get getTitulo()
+			{
+				return this.titulo;
+			}
+			get getUrl()
+			{
+				return this.url;
+			}
+			get getDescri()
+			{
+				return this.descri;
+			}
+		}
+		
+		function abrirFormulario()
+		{
+			arrayBooks[this.id].getTitulo;
+			arrayBooks[this.id].getUrl;
+			arrayBooks[this.id].getDescri;
+		}
+		
+		function crearBoton(text)
+		{
+			var boton = document.createElement('button');
+			boton.textContent=text;
+			boton.style.backgroundColor="lightgreen";
+			boton.style.marginTop="5px";
+			boton.style.width="100%";
+			boton.style.border="none";
+			boton.innerHTML="a&ntilde;adir +";
+			var text = '';
+			if(contadorBoton == 0)
+				{
+					text = 'bookm ';
+					contadorBoton++;
+				}else{
+					text = 'label ';
+				}
+			boton.onclick = function() { 
+				var cajitaAmarilla = document.createElement('div');
+				cajitaAmarilla.style.backgroundColor="yellow";
+				cajitaAmarilla.style.margin="10px 0px";
+				cajitaAmarilla.style.cursor="pointer";
+				cajitaAmarilla.draggable ="true";
+				if(text=='bookm ')
+				{
+					cajitaAmarilla.innerHTML =  text + contadorBookmark;
+					cajitaAmarilla.id = indice;
+					contadorBookmark++;
+					var obj = new Book();
+					arrayBooks.push(obj);
+					cajitaAmarilla.addEventListener("click",abrirFormulario);
+					indice++;
+				}else{
+					cajitaAmarilla.innerHTML =  text + contadorEtiquetas;
+					contadorEtiquetas++;
+				}
+				boton.parentNode.appendChild(cajitaAmarilla);
+			}
+			
+			return boton;
+		}
+			function content(box,numeroCaja)
+			{
+				var title = document.createElement('div');
+				title.style.backgroundColor = "lightblue";
+				title.style.padding="5px";
+				var anadir = crearBoton();
+				var contenido = document.createElement('div');
+						for(var x = 0;x < 3;x++)
+						{
+							var text = '';
+							switch(x)
+							{
+								case 0:
+									text = 'titulo';
+								break;
+								case 1:
+									text = 'url';
+								break;
+								case 2:
+									text = 'descri';
+								break;
+							}
+							
+							var textbox = document.createElement('input');
+							var text2 = document.createTextNode(text);
+							var breaking = document.createElement('br');
+							textbox.type = 'text';
+							textbox.style.width="90%";
+							textbox.style.float="right";
+							textbox.placeholder=text;
+							textbox.onchange = function()
+							{
+								switch(text)
+								{
+								case 'titulo':
+									
+								break;
+								case 'url':
+									
+								break;
+								case 'descri':
+									
+								break;
+								}
+							}
+							var littleBox = document.createElement('div');
+							littleBox.style.width="100%";
+							littleBox.appendChild(text2);
+							littleBox.appendChild(textbox);
+							contenido.appendChild(littleBox);
+							contenido.appendChild(breaking);
+							
+						}
+				switch(numeroCaja)
+				{
+					case 0:
+						title.innerHTML  = "BOOKMARKS";
+						contenido.style.display="none";
+					break;
+					case 1:
+						title.innerHTML  = "CONTENIDO";
+						anadir.style.display="none";
+					break;
+					case 2:
+						title.innerHTML  = "ETIQUETAS";
+						contenido.style.display="none";
+					break;
+				}
+				box.appendChild(title);
+				box.appendChild(anadir);
+				box.appendChild(contenido);
+			}
+			var y = document.body;
+			for(var x = 0;x < 3;x++)
+			{
+				var box = document.createElement('div');
+				box.style.border="2px solid grey";
+				box.style.float="left";
+				box.style.padding="5px";
+				box.style.margin="15px";
+				box.style.width="25%";
+				content(box,x);
+				y.appendChild(box);
+			}
+		</script>
+	</body>
+</html>

@@ -11,24 +11,12 @@
 		var contadorBookmark =1;
 		var contadorEtiquetas = 1;
 		var indice = 0;
-		
+
 		class Book{
 			constructor(){
 				this.titulo = "";
 				this.url = "";
 				this.descri = "";
-			}
-			set setTitulo(titulo)
-			{
-				this.titulo = titulo;
-			}
-			set setUrl(url)
-			{
-				this.url = url;
-			}
-			set setDescri(descri)
-			{
-				this.descri = descri;
 			}
 			get getTitulo()
 			{
@@ -46,9 +34,65 @@
 		
 		function abrirFormulario()
 		{
-			arrayBooks[this.id].getTitulo;
-			arrayBooks[this.id].getUrl;
-			arrayBooks[this.id].getDescri;
+			var body = document.body.children[2];
+			var contentForm = document.createElement('div');
+			var id = parseInt(this.id);
+			for(var x = 0;x < 3;x++)
+						{
+							var text = '';
+							switch(x)
+							{
+								case 0:
+									text = 'titulo';
+								break;
+								case 1:
+									text = 'url';
+								break;
+								case 2:
+									text = 'descri';
+								break;
+							}
+							
+							var textbox = document.createElement('input');
+							var text2 = document.createTextNode(text);
+							var breaking = document.createElement('br');
+							textbox.type = 'text';
+							textbox.style.width="90%";
+							textbox.style.float="right";
+							if(x == 0)
+							{
+								textbox.value = arrayBooks[this.id].getTitulo;
+								textbox.onchange = function()
+								{
+									arrayBooks[id].titulo =this.value;
+								}
+							}else if(x == 1)
+							{
+								textbox.value = arrayBooks[this.id].getUrl;
+								textbox.onchange = function()
+								{
+									arrayBooks[id].url =  this.value;
+								}
+							}else if(x == 2)
+							{
+								textbox.value = arrayBooks[this.id].getDescri;
+								textbox.onchange = function()
+								{
+									arrayBooks[id].descri = this.value;
+								}
+							}
+							textbox.placeholder=text;
+							var littleBox = document.createElement('div');
+							littleBox.style.width="100%";
+							littleBox.appendChild(text2);
+							littleBox.appendChild(textbox);
+							if(body.children[1])
+							{
+								body.removeChild(body.children[1]);
+							}	
+							contentForm.appendChild(littleBox);
+						}
+						body.appendChild(contentForm);
 		}
 		
 		function crearBoton(text)
@@ -99,52 +143,6 @@
 				title.style.padding="5px";
 				var anadir = crearBoton();
 				var contenido = document.createElement('div');
-						for(var x = 0;x < 3;x++)
-						{
-							var text = '';
-							switch(x)
-							{
-								case 0:
-									text = 'titulo';
-								break;
-								case 1:
-									text = 'url';
-								break;
-								case 2:
-									text = 'descri';
-								break;
-							}
-							
-							var textbox = document.createElement('input');
-							var text2 = document.createTextNode(text);
-							var breaking = document.createElement('br');
-							textbox.type = 'text';
-							textbox.style.width="90%";
-							textbox.style.float="right";
-							textbox.placeholder=text;
-							textbox.onchange = function()
-							{
-								switch(text)
-								{
-								case 'titulo':
-									
-								break;
-								case 'url':
-									
-								break;
-								case 'descri':
-									
-								break;
-								}
-							}
-							var littleBox = document.createElement('div');
-							littleBox.style.width="100%";
-							littleBox.appendChild(text2);
-							littleBox.appendChild(textbox);
-							contenido.appendChild(littleBox);
-							contenido.appendChild(breaking);
-							
-						}
 				switch(numeroCaja)
 				{
 					case 0:
